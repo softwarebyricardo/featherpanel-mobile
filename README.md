@@ -16,7 +16,7 @@ Learn more: https://featherpanel.com
 FeatherPanel Mobile is conceived, developed, and maintained entirely by **Ricardo Neudorfer**.  
 The app is created to provide a native mobile experience for FeatherPanel users, but it operates as an independent third‑party client.
 
-- **FeatherPanel Mobile** is branded and distributed under the name Ricardo Neudorfer.  
+- **FeatherPanel Mobile** is branded and distributed under the name Software By Ricardo.  
 - The project is not co‑owned, co‑developed, or jointly managed with FeatherPanel or any associated organizations.  
 - All design, development, and store publication decisions are made by Ricardo Neudorfer.
 
