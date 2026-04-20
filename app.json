@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "FeatherPanel Mobile",
-    "slug": "featherpanel-mobile-app",
+    "slug": "featherpanel-mobile",
     "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./assets/images/logo.png",
@@ -50,9 +50,9 @@
         "origin": "https://featherpanel.app/"
       },
       "eas": {
-        "projectId": "73184916-7a9c-4e65-802d-c9db1ae1f2dd"
+        "projectId": "7569b70c-02cb-4d2a-88c7-a19dd753b17b"
       }
     },
-    "owner": "codeforgex_studio"
+    "owner": "softwarebyricardo"
   }
 }
