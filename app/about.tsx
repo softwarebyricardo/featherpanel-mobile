@@ -116,7 +116,7 @@ export default function AboutScreen() {
             </View>
             <Text style={styles.creditText}>
               FeatherPanel Mobile is developed, published, and operated by 
-              Software By Ricardo. This app is created for FeatherPanel users 
+              Ricardo Neudorfer. This app is created for FeatherPanel users 
               and is not affiliated with any other organization.
             </Text>
           </View>
@@ -125,14 +125,14 @@ export default function AboutScreen() {
         <View style={styles.disclaimerSection}>
           <Text style={styles.disclaimerText}>
             FeatherPanel is a trademark of the MythicalSystems Studios project. 
-            This mobile app is an independent client developed by Software By Ricardo 
+            This mobile app is an independent client developed by Ricardo Neudorfer 
             and is not associated with any other entities.
           </Text>
         </View>
 
         <View style={styles.footer}>
           <Text style={styles.footerText}>
-            © {new Date().getFullYear()} Software By Ricardo
+            © {new Date().getFullYear()} Ricardo Neudorfer
           </Text>
           <Text style={styles.footerSubtext}>
             Independent FeatherPanel mobile client
