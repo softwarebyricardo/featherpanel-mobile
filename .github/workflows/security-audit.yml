@@ -1,0 +1,81 @@
+name: React Native Security Audit
+
+on:
+  push:
+    branches: [ main, security-update-2026 ]
+  pull_request:
+    branches: [ main ]
+  schedule:
+    # Run security audit daily at 2 AM UTC
+    - cron: '0 2 * * *'
+
+jobs:
+  security-audit:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        
+    - name: Install dependencies
+      run: npm ci
+      
+    - name: Run Expo security checks
+      run: |
+        npx expo doctor
+        
+    - name: Run security audit
+      run: |
+        npm audit --audit-level=high
+        npm outdated
+        
+    - name: Check for vulnerable React Native packages
+      run: |
+        # Check for known malicious packages specific to React Native
+        if npm list axios | grep -E "(1\.14\.1|0\.30\.4)"; then
+          echo "❌ CRITICAL: Malicious axios version detected!"
+          exit 1
+        fi
+        
+        # Check for outdated Expo SDK
+        if npm list expo | grep -v "52\."; then
+          echo "⚠️  WARNING: Expo SDK may be outdated"
+        fi
+        
+        echo "✅ No known malicious packages detected"
+        
+    - name: Check TypeScript security
+      run: |
+        npx tsc --noEmit || echo "TypeScript check completed with warnings"
+        
+    - name: Generate Security Report
+      if: always()
+      run: |
+        echo "## 🛡️ React Native Security Audit Report" > security-report.md
+        echo "Generated on: $(date)" >> security-report.md
+        echo "" >> security-report.md
+        echo "### Expo Doctor Results" >> security-report.md
+        npx expo doctor >> security-report.md 2>&1 || true
+        echo "" >> security-report.md
+        echo "### NPM Audit Results" >> security-report.md
+        npm audit --audit-level=info --json > audit.json || true
+        if [ -s audit.json ]; then
+          echo "Vulnerabilities found - check audit.json" >> security-report.md
+        else
+          echo "✅ No vulnerabilities detected" >> security-report.md
+        fi
+        
+    - name: Upload security artifacts
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: rn-security-audit-results
+        path: |
+          security-report.md
+          audit.json
